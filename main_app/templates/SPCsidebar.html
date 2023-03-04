@@ -1,0 +1,105 @@
+<nav id="sidebarMenu" class="navbar-dark bg-dark col-md-3 col-lg-2 d-md-block sidebar-sticky collapse">
+    <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+            <div class="mb-4">
+            <li class="nav-item  ">
+                <a class="nav-link " href="{% url 'Shome' %}">
+                    <span class="bi bi-house-door"></span>
+                    Dashboard
+                </a>
+            </li>
+           </div>
+           {% if user.is_authenticated and user.is_staff  %}
+           <div>
+            <div class="mb-4">
+                
+
+           </div>
+            {% else %}
+           <div class="mb-4">
+            <button class="btn bg-transparent align-items-center rounded collapsed" data-bs-toggle="collapse"
+                data-bs-target="#new-collapse" aria-expanded="true">
+                <span class='navbar-text'><b>Analytics</b></span>
+            </button>
+            <div class="mb-4">
+                <li class="nav-item">
+                    <a class="nav-link " href="{% url 'Hanalysis' %}">
+                        <i class="bi bi-graph-up"></i>
+                        Overall Analytics
+                    </a>
+                </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{% url 'Panalysis' %}">
+                    <i class="bi bi-graph-up"></i>
+                    Placements
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{% url 'Ianalysis' %}">
+                    <i class="bi bi-graph-up"></i>
+                    Internship
+                </a>
+            </li>
+            
+        </div>
+        {% endif %}
+           <div class="mb-4">
+            <button class="btn bg-transparent align-items-center rounded collapsed" data-bs-toggle="collapse"
+                data-bs-target="#new-collapse" aria-expanded="true">
+                <span class='navbar-text'><b>Lists</b></span>
+            </button>
+           <div class="mb-4">
+            <li class="nav-item ">
+                <a class="nav-link " href="{% url 'Intern_list' %}">
+                    <span class="bi bi-bar-chart-fill"></span>
+                    Internship List
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link " href="{% url 'Placed_list' %}">
+                    <span class="bi bi-bar-chart-fill"></span>
+                    Placement List
+                </a>
+
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link " href="{% url 'Ulist' %}">
+                    <span class="bi bi-bar-chart-fill"></span>
+                    Unplaced List
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{% url 'Grad_list' %}">
+                    <span class="bi bi-bar-chart-fill"></span>
+                    Graduated List
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{% url 'Dlist' %}">
+                    <span class="bi bi-bar-chart-fill"></span>
+                    Internship Drive 
+                </a>
+            </li>
+            
+            </div>
+            {% if user.is_authenticated and  user.is_staff %}
+            <button class="btn bg-transparent align-items-center rounded collapsed" data-bs-toggle="collapse"
+                data-bs-target="#new-collapse" aria-expanded="true">
+                <span class='navbar-text'><b>Import details</b></span>
+            </button>
+            <div class="mb-4">
+            <li class="nav-item">
+                <a class="nav-link " href="{% url 'upload' %}">
+                    <span class="bi bi-box-arrow-in-up"></span>
+                    Import Placement Details
+                </a>
+            </li>
+            
+            
+        </div>
+        {% endif %}
+       
+        </ul>
+    </div>
+</nav>

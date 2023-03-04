@@ -1,0 +1,41 @@
+The following students have attended the internship drives in this week 
+<br>
+Below is the list
+
+
+<table class="mt-4 table table-bordered border-dark">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">USN</th>
+            <th scope="col">Name</th>
+            <th scope="col">sem</th>
+            <th scope="col">RV Email</th>
+            <th scope="col">Company</th>
+            <th scope="col">Date of Drive</th>
+            <th scope="col">Type</th>
+           
+            
+            
+            <th></th>
+            
+        </tr>
+    </thead>
+        
+    <tbody>
+        
+        {% for list in DList %}
+        <tr>
+            
+          
+            <td>{{list.Usn}}</td>
+            <td>{{list.Full_name}}</td>
+            <td>{{list.semester}}</td>
+            <td>{{list.rvce_email}}</td>
+            <td>{{list.Company}}</td>
+            <td>{{list.Date_of_drive}} </td>
+            <td>{{list.Type}}</td>
+        </tr>
+        {% endfor %}
+       
+    </tbody>
+    </table>        

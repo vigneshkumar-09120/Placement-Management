@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{% block sidebar %}
+{% if user.is_authenticated and user.is_superuser or user.is_staff %}
+{% include 'SPCsidebar.html'%}
+{% endif %}
+{% endblock %}
+{% block content %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+<h1>Email sent successfully...!! :)</h1>
+<div class="mt-4">
+<a href="{% url 'Dlist' %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Back to Details</a>
+</div>
+</main>
+{% endblock %}

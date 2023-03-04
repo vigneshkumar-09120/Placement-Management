@@ -1,0 +1,80 @@
+{% extends 'base.html'%}
+{% block sidebar %}
+{% if user.is_authenticated and user.is_superuser or user.is_staff %}
+{% include 'SPCsidebar.html'%}
+{% endif %}
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated and user.is_superuser or user.is_staff %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="card text-white bg-dark col-md-6 offset-md-3 mt-5 p-5">
+      <h1 class="h2 mb-4">Placement / Internship Drive form</h1>
+      <form action=" " method="post" autofill='off'>
+        {% csrf_token %}
+        <div class="mt-4">
+          <label class="col-form-label">USN *</label>
+          {{ form.Usn }}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">Full name *</label>
+          {{ form.Full_name }}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">Semester *</label>
+          {{ form.semester }}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">RV Email ID *</label>
+          {{ form.rvce_email}}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">Personal Email ID *</label>
+          {{ form.personal_email}}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">Phone *</label>
+          {{ form.phone }}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">Interested in Higher Studies ? *</label>
+          {{ form.Interested_In_higherStudies }}
+        </div>
+        <br>
+        <h2 class="h2 mb-4">Drive Details</h2>
+        <div class="mt-4">
+          <label class="col-form-label">Company Name *</label>
+          {{ form.Company}}
+        </div>
+        <div class="mt-4">
+            <label class="col-form-label">Date of Drive *</label>
+            {{ form.Date_of_drive}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">Type of Drive *</label>
+            {{ form.Type}}
+          </div>
+          
+        <div class="mt-4">
+          {% if messages %}
+          <ul class="success-list">
+            {% for message in messages %}
+            <li class="success-list">{{ message }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% if form.errors %}
+          <ul class="error-list">
+            {% for key,value in form.errors.items %}
+            <li>{{ value|escape }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        <div class="mt-4">
+          <button type="submit" class="btn btn-primary">Add Details</button>
+        </div>
+      </form>
+    </div>
+  </main>
+{% endif %} 
+{% endblock %}

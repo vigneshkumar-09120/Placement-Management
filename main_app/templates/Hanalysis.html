@@ -1,0 +1,150 @@
+{% extends 'base.html'%}
+{% block sidebar %}
+
+{% include 'SPCsidebar.html'%}
+
+{% endblock %}
+{% block content %}
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-">
+  
+  <div class="
+  d-flex
+  justify-content-between
+  flex-wrap flex-md-nowrap
+  align-items-center
+  pt-3
+  pb-2
+  mb-3
+  border-bottom
+">
+<h1 class="h2">ISE Department Placements </h1>
+</div>
+<div class="container" >
+   
+    
+    <div class="row">
+   
+        <div class="col-md-10 col-sm-6">
+            <h3>No of offers by year</h3>
+              <canvas id="myChart"></canvas>
+          </div>
+         
+        <div class="col-md-10 col-sm-6">
+          <h3>Highest package by year</h3>
+            <canvas id="myChar"></canvas>
+        </div>
+        <div class="col-md-10 col-sm-6">
+            <h3>Lowest package by year</h3>
+              <canvas id="myCha"></canvas>
+          </div>
+          <div class="col-md-10 col-sm-6">
+            <h3>Average package by year</h3>
+              <canvas id="myCh"></canvas>
+          </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+    <script>
+      const ctr = document.getElementById('myChart');
+    
+      new Chart(ctr, {
+        type: 'bar',
+        data: {
+          labels: ['2021', '2022','2023','2024'],
+          datasets: [{
+            label: 'No of Offers',
+            data: [{{o1}},{{o2}},{{o3}},{{o4}}],
+           
+            borderWidth: 3
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>   
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+    <script>
+      const ct = document.getElementById('myChar');
+    
+      new Chart(ct, {
+        type: 'bar',
+        data: {
+          labels: ['2021', '2022','2023','2024'],
+          datasets: [{
+            label: ' HIghest Package in CTC',
+            data: [{{a.a}},{{b.b}},{{c.c}},{{d.d}}],
+            borderColor: '#FF6384',
+      backgroundColor: '#FFB1C1',
+           
+            borderWidth: 3
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>  
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+    <script>
+      const ctc = document.getElementById('myCha');
+    
+      new Chart(ctc, {
+        type: 'bar',
+        data: {
+          labels: ['2021', '2022','2023','2024'],
+          datasets: [{
+            label: 'Lowest Package in CTC',
+            data: [{{l1.l1}},{{l2.l2}},{{l3.l3}},{{l4.l4}}],
+           
+            borderWidth: 3
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+    <script>
+      const ctm = document.getElementById('myCh');
+    
+      new Chart(ctm, {
+        type: 'bar',
+        data: {
+          labels: ['2021', '2022','2023','2024'],
+          datasets: [{
+            label: 'Average Package in CTC',
+            data: [{{a1.a1}},{{a2.a2}},{{a3.a3}},{{a4.a4}}],
+            borderColor: '#FF6384',
+      backgroundColor: '#FFB1C1',
+            borderWidth: 3
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>     
+ {% endblock %}   

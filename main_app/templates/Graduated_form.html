@@ -1,0 +1,115 @@
+{% extends 'base.html'%}
+{% block sidebar %}
+{% if user.is_authenticated and user.is_superuser or user.is_staff %}
+{% include 'SPCsidebar.html'%}
+{% endif %}
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated and user.is_superuser or user.is_staff %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="card text-white bg-dark col-md-6 offset-md-3 mt-5 p-5">
+      <h1 class="h2 mb-4">Graduated Students Details form</h1>
+      <form action=" " method="post">
+        {% csrf_token %}
+        <div class="mt-4">
+          <label class="col-form-label">USN </label>
+          {{ form.Usn }}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">Full name *</label>
+          {{ form.Full_name }}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">Personal Email *</label>
+          {{ form.personal_email }}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">Phone Number *</label>
+          {{ form.phone}}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">Date of Graduation *</label>
+          {{ form.Date_of_Grad}}
+        </div>
+       <br>
+        <h2 class="h2 mb-4">Higher Studies Details</h2>
+        <div class="mt-4">
+          <label class="col-form-label">GRE score</label>
+          {{ form.Gre_score}}
+        </div>
+        <div class="mt-4">
+            <label class="col-form-label">GMAT Score</label>
+            {{ form.Gmat_score}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">TOEFL Score</label>
+            {{ form.Toefl_score}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">IELTS Score</label>
+            {{ form.Ielts_score}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">GATE Score</label>
+            {{ form.Gate_score}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">Other Exam Scores</label>
+            {{ form.Other_score}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">University </label>
+            {{ form.University}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">Specialization</label>
+            {{ form.Specialization}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">Date of Joining</label>
+            {{ form.Date_of_Join}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">Date Of Graduation</label>
+            {{ form.Date_of_UniGrad}}
+          </div>
+          <br>
+          <h2 class="h2 mb-4">Profile Details</h2>
+          <div class="mt-4">
+            <label class="col-form-label">Current Profile</label>
+            {{ form.Current_profile_details}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">Role</label>
+            {{ form.Role}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">Salary per month </label>
+            {{ form.Salary}}
+          </div>
+          
+
+        <div class="mt-4">
+          {% if messages %}
+          <ul class="success-list">
+            {% for message in messages %}
+            <li class="success-list">{{ message }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% if form.errors %}
+          <ul class="error-list">
+            {% for key,value in form.errors.items %}
+            <li>{{ value|escape }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        <div class="mt-4">
+          <button type="submit" class="btn btn-primary">Add Details</button>
+        </div>
+      </form>
+    </div>
+  </main>
+{% endif %} 
+{% endblock %}

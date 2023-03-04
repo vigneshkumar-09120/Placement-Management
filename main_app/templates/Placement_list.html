@@ -1,0 +1,84 @@
+{% extends 'base.html'%}
+{% block sidebar %}
+{% include 'SPCsidebar.html'%}
+{% endblock %}
+{% block content %}
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <h1 class="mt-5 h2">Placement List</h1>
+    {% if user.is_authenticated and user.is_staff or user.is_superuser %}
+    <a href="{% url 'Placed_form' %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Add New</a>
+    {% endif %}
+    <br>
+    <form action="">
+        <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+          <div class="input-group">
+            <input type="search" name="q" placeholder="Search based on Year, USN , Full Name , semester , Type of Offer, Role ,CTC and Company" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+            <div class="input-group-append">
+              <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="bi bi-search"></i></button>
+            </div>
+          </div>
+        </div>
+        </form>
+        <table class="mt-4 table table-bordered border-dark">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">USN</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">sem</th>
+                    <th scope="col">RV Email</th>
+                    <th scope="col">Company</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">PPO</th>
+                    <th scope="col">FTE</th>
+                    <th scope="col">CTC</th> 
+                    {% if user.is_authenticated and user.is_staff or user.is_superuser %}
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                    {% endif %}
+
+                    
+                    
+                    <th></th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for list in PlacedList %}
+                <tr>
+                    
+                  
+                    <td>{{list.Usn}}</td>
+                    <td>{{list.Full_name}}</td>
+                    <td>{{list.semester}}</td>
+                    <td>{{list.rvce_email}}</td>
+                    <td>{{list.Company}}</td>
+                    <td>{{list.Category}} </td>
+                    <td>{{list.Role}}</td>
+                    <td>{{list.Ppo}}</td>
+                    <td>{{list.Fte}}</td>
+                    <td>{{list.Ctc}}</td>
+                    {% if user.is_authenticated and user.is_staff or user.is_superuser %}
+                    <td>
+                       <a href="{% url 'Placedupdate' list.id %}" class="btn text secondary px-0">
+                        <i class="bi bi-pencil-square"></i>
+                       </a>
+                    </td>
+                    <td>
+                    <form action="{% url 'Placeddel' list.id %}" method="post" onsubmit = "return confirm('Are you sure you want to delete?')">
+                        {% csrf_token %}
+                        <button type="'submit" class="btn">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                    </td>
+                    {% endif %}
+                   
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}

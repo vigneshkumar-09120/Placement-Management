@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .counter{
+    color: #fff;
+    background: linear-gradient(to right bottom, #4d4c48, #44423f);
+    font-family: 'Dosis', sans-serif;
+    text-align: center;
+    width: 180px;
+    height: 180px;
+    padding: 40px 20px 20px;
+    margin: 0 auto;
+    border-radius: 10px 10px 100px 100px;
+    box-shadow: 0 0 15px -5px rgba(0,0,0,0.3);
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+.counter:after{
+    content: '';
+    background-color: #2c2821;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+}
+.counter .counter-value{
+    font-size: 55px;
+    font-weight: 600;
+    line-height: 40px;
+    margin: 0 0 15px;
+    display: block;
+}
+.counter h3{
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 20px;
+}
+.counter.green{ background: linear-gradient(to right bottom, #32352c, #1c1f1b); }
+.counter.green:after{ background: #52C242; }
+.counter.cgreen{ background: linear-gradient(to right bottom, #01AD9F, #008888); }
+.counter.cgreen:after{ background: #1e2929; }
+.counter.blue{ background: linear-gradient(to right bottom, #252a2b, #171b1e); }
+.counter.blue:after{ background: #131719; }
+@media screen and (max-width:990px){
+    .counter{ margin-bottom: 40px; }
+}
+    </style>
+</head>
+{% extends 'base.html'%}
+{% block sidebar %}
+
+{% include 'SPCsidebar.html'%}
+
+{% endblock %}
+{% block content %}
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-">
+  
+  <div class="
+  d-flex
+  justify-content-between
+  flex-wrap flex-md-nowrap
+  align-items-center
+  pt-3
+  pb-2
+  mb-3
+  border-bottom
+">
+<h1 class="h2">Placement analytics - {{q}} </h1>
+
+<form action="">
+  <div class="col-md-10" >
+    <div class="input-group">
+      <b>Enter the year</b>
+      <input type="search" name="q" placeholder="Enter the year">
+      <div class="input-group-append">
+        <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="bi bi-arrow-right-square"></i></button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+        
+       
+<div class="container" >
+  <div class="row">
+      <div class="col-md-3 col-sm-6">
+          <div class="counter">
+              <span class="counter-value">{{elig}}</span>
+              <h3>Eligible Students</h3>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+          <div class="counter blue">
+              <span class="counter-value">{{placed}}</span>
+              <h3>Placed students</h3>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+          <div class="counter">
+              <span class="counter-value">{{hs}}</span>
+              <h3>Higher studies</h3>
+          </div>
+      </div>
+      
+  </div>
+<br>
+<br>
+  <div class="container" >
+   
+    
+        <div class="row">
+       
+            <div class="col-md-4 col-sm-6">
+              <h3>Offers</h3>
+                <canvas id="myChart"></canvas>
+            </div>
+             
+            <div class="col-md-7 col-sm-6">
+              <h3>Package in CTC</h3>
+                <canvas id="myChar"></canvas>
+            </div>
+            
+
+            
+            
+        
+        </div>
+        <br>
+        <br>
+        <div class="col-md-10 col-sm-6">
+          <h3>CTC Breakdown</h3>
+            <canvas id="myCha"></canvas>
+        </div>
+        </div>
+  
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script>
+       
+        
+        $(document).ready(function(){
+            $('.counter-value').each(function(){
+                $(this).prop('Counter',0).animate({
+                    Counter: $(this).text()
+                },{
+                    duration: 3500,
+                    easing: 'swing',
+                    step: function (now){
+                        $(this).text(Math.ceil(now));
+                    }
+                });
+            });
+        });
+       </script>        
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    const ctx = document.getElementById('myChart');
+  
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Open Dream', 'Dream'],
+        datasets: [{
+          label: 'No of Offers',
+          data: [{{data1}}, {{data2}}],
+          
+          borderWidth: 3
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+      
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    const ct = document.getElementById('myChar');
+  
+    new Chart(ct, {
+      type: 'bar',
+      data: {
+        labels: ['Highest', 'Lowest','Avg'],
+        datasets: [{
+          label: 'Package in CTC',
+          data: [{{high.high}},{{low.low}},{{avg.avg}}],
+         
+          borderWidth: 3
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+<script>
+  const c = document.getElementById('myCha');
+
+  new Chart(c, {
+    type: 'bar',
+    data: {
+      labels: ['Below 8', 'Below 15','Below 25','Above 25'],
+      datasets: [{
+        label: 'CTC Breakdown (LPA)',
+        data: [{{a}},{{b}},{{c}},{{d}}],
+        borderColor: '#FF6384',
+      backgroundColor: '#FFB1C1',
+        borderWidth: 3
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+  
+  
+  
+   
+</main>
+{% endblock %}

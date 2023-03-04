@@ -1,0 +1,89 @@
+{% extends 'base.html'%}
+{% block sidebar %}
+{% include 'SPCsidebar.html'%}
+{% endblock %}
+{% block content %}
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <h1 class="mt-5 h2">Unplaced Students List</h1>
+    {% if user.is_authenticated and user.is_staff or user.is_superuser %}
+    <a href="{% url 'Uform' %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Add New</a>
+    {% endif %}
+    <br>
+    <form action="">
+        <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+          <div class="input-group">
+            <input type="search" name="q" placeholder="Search based on USN , Name , Remarks  " aria-describedby="button-addon1" class="form-control border-0 bg-light">
+            <div class="input-group-append">
+              <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="bi bi-search"></i></button>
+            </div>
+          </div>
+        </div>
+        </form>
+        <table class="mt-4 table table-bordered border-dark">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">USN</th>
+                    <th scope="col">Name</th>
+                    
+                    <th scope="col">RV Email</th>
+                    <th scope="col">1st<br>sem<br>CGPA</th>
+                    <th scope="col">2nd<br>sem<br>CGPA</th>
+                    <th scope="col">3rd<br>sem<br>CGPA</th>
+                    <th scope="col">4th<br>sem<br>CGPA</th>
+                    <th scope="col">5th<br>sem<br>CGPA</th>
+                    <th scope="col">6th<br>sem<br>CGPA</th>
+                    <th scope="col">7th<br>sem<br>CGPA</th>
+                    <th scope="col">8th<br>sem<br>CGPA</th>
+                    <th scope="col">Remarks</th>
+                    {% if user.is_authenticated and user.is_staff or user.is_superuser %}
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+
+                    {% endif %}
+                    
+                    <th></th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for list in UList %}
+                <tr>
+                    
+                  
+                    <td>{{list.Usn}}</td>
+                    <td>{{list.Full_name}}</td>
+                    
+                    <td>{{list.rvce_email}}</td>
+                    <td>{{list.first_cgpa}}</td>
+                    <td>{{list.sec_cgpa}} </td>
+                    <td>{{list.third_cgpa}}</td>
+                    <td>{{list.four_cgpa}}</td>
+                    <td>{{list.five_cgpa}}</td>
+                    <td>{{list.six_cgpa}}</td>
+                    <td>{{list.seven_cgpa}}</td>
+                    <td>{{list.eight_cgpa}}</td>
+                    <td>{{list.Remarks}}</td>
+                    {% if user.is_authenticated and user.is_staff or user.is_superuser %}
+                    <td>
+                       <a href="{% url 'Uupdate' list.id %}" class="btn text secondary px-0">
+                        <i class="bi bi-pencil-square"></i>
+                       </a>
+                    </td>
+                    <td>
+                    <form action="{% url 'Udel' list.id %}" method="post" onsubmit = "return confirm('Are you sure you want to delete?')">
+                        {% csrf_token %}
+                        <button type="'submit" class="btn">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                    </td>
+                   {% endif %}
+                   
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}

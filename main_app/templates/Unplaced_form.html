@@ -1,0 +1,113 @@
+{% extends 'base.html'%}
+{% block sidebar %}
+{% if user.is_authenticated and user.is_superuser or user.is_staff %}
+{% include 'SPCsidebar.html'%}
+{% endif %}
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated and user.is_superuser or user.is_staff %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="card text-white bg-dark col-md-6 offset-md-3 mt-5 p-5">
+      <h1 class="h2 mb-4">Unplaced Students Details form</h1>
+      <form action=" " method="post">
+        {% csrf_token %}
+        <div class="mt-4">
+          <label class="col-form-label">USN *</label>
+          {{ form.Usn }}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">Full name *</label>
+          {{ form.Full_name }}
+        </div>
+        
+        <div class="mt-4">
+          <label class="col-form-label">RV Email ID *</label>
+          {{ form.rvce_email}}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">Personal Email ID *</label>
+          {{ form.personal_email}}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">Phone *</label>
+          {{ form.phone }}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">Higher Studies ?*</label>
+          {{ form.Interested_In_higherStudies }}
+        </div>
+        <div class="mt-4">
+          <label class="col-form-label">Was he/she eligible for Placement Drive ?*</label>
+          {{ form.Eligible }}
+        </div>
+        <br>
+        <h2 class="h2 mb-4">Academic Details *</h2>
+        <div class="mt-4">
+          <label class="col-form-label">10Th Score *</label>
+          {{ form.Ten_score}}
+        </div>
+        <div class="mt-4">
+            <label class="col-form-label">12Th Score *</label>
+            {{ form.Twelth_score}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">1st Sem CGPA *</label>
+            {{ form.first_cgpa}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">2st Sem CGPA *</label>
+            {{ form.sec_cgpa}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">3rd Sem CGPA *</label>
+            {{ form.third_cgpa}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">4th Sem CGPA *</label>
+            {{ form.four_cgpa}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">5th Sem CGPA *</label>
+            {{ form.five_cgpa}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">6th Sem CGPA *</label>
+            {{ form.six_cgpa}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">7th Sem CGPA *</label>
+            {{ form.seven_cgpa}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">8th Sem CGPA *</label>
+            {{ form.eight_cgpa}}
+          </div>
+          <div class="mt-4">
+            <label class="col-form-label">Remarks *</label>
+            {{ form.Remarks}}
+          </div>
+
+        <div class="mt-4">
+          {% if messages %}
+          <ul class="success-list">
+            {% for message in messages %}
+            <li class="success-list">{{ message }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% if form.errors %}
+          <ul class="error-list">
+            {% for key,value in form.errors.items %}
+            <li>{{ value|escape }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        <div class="mt-4">
+          <button type="submit" class="btn btn-primary">Add Details</button>
+        </div>
+      </form>
+    </div>
+  </main>
+{% endif %} 
+{% endblock %}
